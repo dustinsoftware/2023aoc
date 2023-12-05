@@ -78,3 +78,48 @@ test("test case 5", async ({ page }) => {
         "Result: 142"
     );
 });
+
+test("test case 6", async ({ page }) => {
+    await page.route("*/**/assets/day1.txt", async (route) => {
+        await route.fulfill({
+            body: `two1nine`,
+        });
+    });
+
+    await page.goto("http://localhost:3000/day1");
+    await expect(page.locator('[data-testid="results"]')).toContainText(
+        "Result: 29"
+    );
+});
+
+test("test case 7", async ({ page }) => {
+    await page.route("*/**/assets/day1.txt", async (route) => {
+        await route.fulfill({
+            body: `eightwothree`,
+        });
+    });
+
+    await page.goto("http://localhost:3000/day1");
+    await expect(page.locator('[data-testid="results"]')).toContainText(
+        "Result: 83"
+    );
+});
+
+test("test case 8", async ({ page }) => {
+    await page.route("*/**/assets/day1.txt", async (route) => {
+        await route.fulfill({
+            body: `two1nine
+            eightwothree
+            abcone2threexyz
+            xtwone3four
+            4nineeightseven2
+            zoneight234
+            7pqrstsixteen`,
+        });
+    });
+
+    await page.goto("http://localhost:3000/day1");
+    await expect(page.locator('[data-testid="results"]')).toContainText(
+        "Result: 281"
+    );
+});
