@@ -12,10 +12,12 @@ test("day 1 loads", async ({ page }) => {
 });
 
 test("loads from mock", async ({ page }) => {
-  await page.route("**/assets/day1.txt", async (route) => {
+  await page.route("*/**/assets/day1.txt", async (route) => {
     await route.fulfill({ body: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10" });
   });
 
   await page.goto("http://localhost:3000/day1");
-  await expect(page.locator("text=Result: 11")).toBeVisible();
+  await expect(page.locator('[data-testid="results"]')).toContainText(
+    "Result: 10"
+  );
 });

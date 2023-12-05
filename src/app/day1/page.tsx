@@ -10,7 +10,7 @@ export default function Day1() {
           Day 1
         </p>
       </div>
-      <div>
+      <div data-testid="results">
         Result: <ResultsParser />
       </div>
     </main>
